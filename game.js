@@ -11,7 +11,7 @@ const clone = o => JSON.parse(JSON.stringify(o));
 function makeState(){
   return {
     version:D.version,
-    resources:{provisions:120,alloy:15,fuel:0,data:0,authority:0,relics:0},
+    resources:{provisions:120,alloy:45,fuel:0,data:0,authority:0,relics:0},
     units:Object.fromEntries(Object.keys(D.units).map(k=>[k,0])),
     research:{},
     doctrine:Object.fromEntries(Object.keys(D.doctrine).map(k=>[k,0])),
