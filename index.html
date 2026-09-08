@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111315">
+  <meta name="description" content="Cinder Throne: Sector Command — an original gothic far-future incremental strategy game.">
+  <title>Cinder Throne: Sector Command</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="eyebrow">GOTHIC FAR-FUTURE INCREMENTAL STRATEGY</div>
+      <h1>CINDER THRONE</h1>
+      <div class="subtitle">SECTOR COMMAND</div>
+    </div>
+
+    <div class="campaign-summary">
+      <div class="metric"><span>Front</span><strong id="sectorName">Ashfall Reach</strong></div>
+      <div class="metric"><span>Threat</span><strong id="threatLabel">Low</strong></div>
+      <div class="metric"><span>Legacy</span><strong id="legacyTop">0</strong></div>
+    </div>
+
+    <div class="top-actions">
+      <button id="saveBtn">Save</button>
+      <button id="exportBtn">Export</button>
+      <button id="importBtn">Import</button>
+      <button id="resetBtn" class="danger">Reset</button>
+    </div>
+  </header>
+
+  <div id="resourceStrip" class="resource-strip"></div>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <button class="nav active" data-tab="command">Command</button>
+      <button class="nav" data-tab="industry">Industry</button>
+      <button class="nav" data-tab="forces">Forces</button>
+      <button class="nav" data-tab="fleet">Fleet</button>
+      <button class="nav" data-tab="research">Research</button>
+      <button class="nav" data-tab="sector">Sector</button>
+      <button class="nav" data-tab="doctrine">Doctrine</button>
+      <button class="nav" data-tab="records">Records</button>
+
+      <div class="side-rule"></div>
+      <div class="side-label">Purchase batch</div>
+      <div class="batch-row">
+        <button class="batch active" data-buy="1">1</button>
+        <button class="batch" data-buy="10">10</button>
+        <button class="batch" data-buy="25">25</button>
+        <button class="batch" data-buy="max">MAX</button>
+      </div>
+
+      <div class="side-rule"></div>
+      <label class="toggle"><input id="autoBuyToggle" type="checkbox"> Auto-quartermaster</label>
+      <label class="toggle"><input id="compactToggle" type="checkbox"> Compact cards</label>
+      <label class="toggle"><input id="notationToggle" type="checkbox"> Scientific notation</label>
+
+      <div class="version">Public Alpha v0.2.0</div>
+    </aside>
+
+    <section class="content">
+      <section class="tab active" id="tab-command">
+        <div class="heading">
+          <div><div class="eyebrow">STRATEGIC STATUS</div><h2>Command Deck</h2></div>
+          <div id="clock" class="clock"></div>
+        </div>
+        <div class="dashboard">
+          <article class="panel hero">
+            <div class="panel-kicker">ACTIVE FRONT</div>
+            <h3 id="overviewSector"></h3>
+            <p id="overviewDesc"></p>
+            <div id="objectiveProgress"></div>
+            <button id="advanceBtn" class="primary wide">Conclude Campaign & Translate</button>
+          </article>
+          <article class="panel">
+            <h3>Net Production</h3>
+            <div id="productionSummary"></div>
+          </article>
+          <article class="panel">
+            <h3>Military Readiness</h3>
+            <div id="powerSummary"></div>
+          </article>
+          <article class="panel">
+            <h3>Threat Pressure</h3>
+            <div id="threatSummary"></div>
+            <button id="suppressBtn" class="wide">Launch Suppression Operation</button>
+          </article>
+          <article class="panel">
+            <h3>Vox Log</h3>
+            <div id="log" class="log"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="tab" id="tab-industry">
+        <div class="heading"><div><div class="eyebrow">LOGISTICS & PRODUCTION</div><h2>Industry</h2></div></div>
+        <div class="cards" id="industryCards"></div>
+      </section>
+
+      <section class="tab" id="tab-forces">
+        <div class="heading"><div><div class="eyebrow">GROUND WAR</div><h2>Forces</h2></div></div>
+        <div class="cards" id="forcesCards"></div>
+      </section>
+
+      <section class="tab" id="tab-fleet">
+        <div class="heading"><div><div class="eyebrow">VOID COMMAND</div><h2>Fleet</h2></div></div>
+        <div class="cards" id="fleetCards"></div>
+      </section>
+
+      <section class="tab" id="tab-research">
+        <div class="heading"><div><div class="eyebrow">ARCHIVE SANCTIONS</div><h2>Research</h2></div></div>
+        <div class="tech-grid" id="researchCards"></div>
+      </section>
+
+      <section class="tab" id="tab-sector">
+        <div class="heading"><div><div class="eyebrow">CAMPAIGN THEATRES</div><h2>Sector Map</h2></div></div>
+        <div class="sector-grid" id="sectorGrid"></div>
+      </section>
+
+      <section class="tab" id="tab-doctrine">
+        <div class="heading"><div><div class="eyebrow">PERSISTENT META-PROGRESSION</div><h2>Doctrine</h2></div></div>
+        <article class="panel doctrine-head">
+          <div>
+            <div class="panel-kicker">AVAILABLE LEGACY</div>
+            <div id="legacyLarge" class="legacy-large">0</div>
+          </div>
+          <p>Doctrine persists through campaign translation. Each rank permanently alters future runs.</p>
+        </article>
+        <div class="tech-grid" id="doctrineCards"></div>
+      </section>
+
+      <section class="tab" id="tab-records">
+        <div class="heading"><div><div class="eyebrow">ARCHIVE LEDGER</div><h2>Records</h2></div></div>
+        <div class="records-grid">
+          <article class="panel"><h3>Campaign Statistics</h3><div id="stats"></div></article>
+          <article class="panel"><h3>Achievements</h3><div id="achievementList"></div></article>
+          <article class="panel"><h3>Save Information</h3><div id="saveInfo"></div></article>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+    Cinder Throne is an original open-source project. No third-party franchise artwork, names, logos or game assets are included.
+  </footer>
+</div>
+
+<div id="modal" class="modal hidden">
+  <div class="modal-card">
+    <h3 id="modalTitle">Save Data</h3>
+    <p id="modalHint"></p>
+    <textarea id="saveText"></textarea>
+    <div class="modal-actions">
+      <button id="modalPrimary" class="primary">Copy</button>
+      <button id="modalClose">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="game-data.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
