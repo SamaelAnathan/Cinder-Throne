@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Crusade Engine — Grimdark Idle Prototype</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <div class="kicker">FAR-FUTURE GOTHIC IDLE STRATEGY</div>
+        <h1>CRUSADE ENGINE</h1>
+      </div>
+      <div class="top-stats">
+        <div><span>Sector</span><b id="sectorName">Ashfall Reach</b></div>
+        <div><span>Campaign Level</span><b id="sectorLevel">1</b></div>
+        <div><span>Legacy</span><b id="legacy">0</b></div>
+      </div>
+      <div class="top-actions">
+        <button id="saveBtn">Save</button>
+        <button id="exportBtn">Export</button>
+        <button id="resetBtn" class="danger">Hard Reset</button>
+      </div>
+    </header>
+
+    <div class="resource-strip" id="resourceStrip"></div>
+
+    <main>
+      <aside class="sidebar">
+        <button class="nav active" data-tab="overview">Command</button>
+        <button class="nav" data-tab="forces">Forces</button>
+        <button class="nav" data-tab="industry">Industry</button>
+        <button class="nav" data-tab="research">Research</button>
+        <button class="nav" data-tab="crusade">Crusade</button>
+        <button class="nav" data-tab="doctrine">Doctrine</button>
+        <div class="sidebar-rule"></div>
+        <div class="small-label">Purchase batch</div>
+        <div class="batch-row">
+          <button class="batch active" data-buy="1">1</button>
+          <button class="batch" data-buy="10">10</button>
+          <button class="batch" data-buy="25">25</button>
+          <button class="batch" data-buy="max">MAX</button>
+        </div>
+        <div class="sidebar-rule"></div>
+        <label class="toggle-row">
+          <input type="checkbox" id="autoBuyToggle" />
+          <span>Quartermaster auto-buy</span>
+        </label>
+        <label class="toggle-row">
+          <input type="checkbox" id="compactToggle" />
+          <span>Compact cards</span>
+        </label>
+      </aside>
+
+      <section class="content">
+        <section class="tab active" id="tab-overview">
+          <div class="section-heading">
+            <div>
+              <div class="kicker">STRATEGIC STATUS</div>
+              <h2>Command Deck</h2>
+            </div>
+            <div class="clock" id="gameClock"></div>
+          </div>
+          <div class="dashboard-grid">
+            <article class="panel hero-panel">
+              <h3>Current Crusade</h3>
+              <div class="sector-title" id="overviewSector"></div>
+              <p id="overviewDesc"></p>
+              <div id="campaignProgress"></div>
+              <button id="travelBtn" class="primary wide">Complete Campaign & Advance</button>
+            </article>
+            <article class="panel">
+              <h3>Production Integrity</h3>
+              <div id="productionSummary"></div>
+            </article>
+            <article class="panel">
+              <h3>Active Threats</h3>
+              <div id="threatSummary"></div>
+            </article>
+            <article class="panel">
+              <h3>Recent Vox Log</h3>
+              <div id="log" class="log"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="tab" id="tab-forces">
+          <div class="section-heading">
+            <div><div class="kicker">MUSTER & DEPLOY</div><h2>Forces</h2></div>
+          </div>
+          <div class="cards" id="forcesCards"></div>
+        </section>
+
+        <section class="tab" id="tab-industry">
+          <div class="section-heading">
+            <div><div class="kicker">FORGES & LOGISTICS</div><h2>Industry</h2></div>
+          </div>
+          <div class="cards" id="industryCards"></div>
+        </section>
+
+        <section class="tab" id="tab-research">
+          <div class="section-heading">
+            <div><div class="kicker">FORBIDDEN DATA-VAULTS</div><h2>Research</h2></div>
+          </div>
+          <div class="tech-grid" id="researchCards"></div>
+        </section>
+
+        <section class="tab" id="tab-crusade">
+          <div class="section-heading">
+            <div><div class="kicker">SECTOR CONQUEST</div><h2>Crusade Map</h2></div>
+          </div>
+          <div class="campaign-grid" id="campaignGrid"></div>
+        </section>
+
+        <section class="tab" id="tab-doctrine">
+          <div class="section-heading">
+            <div><div class="kicker">PERSISTENT META-PROGRESSION</div><h2>Doctrine</h2></div>
+          </div>
+          <div class="doctrine-wrap">
+            <article class="panel">
+              <h3>Legacy Points</h3>
+              <p>Legacy survives campaign resets. Spend it on permanent doctrine.</p>
+              <div class="legacy-big" id="doctrineLegacy">0</div>
+            </article>
+            <div class="tech-grid" id="doctrineCards"></div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer>
+      Original grimdark prototype inspired by the systems design of the MIT-licensed IdleAnt2 project.
+      No Games Workshop artwork, logos or proprietary game assets are included.
+    </footer>
+  </div>
+
+  <div class="modal hidden" id="exportModal">
+    <div class="modal-card">
+      <h3>Export Save</h3>
+      <textarea id="exportText" readonly></textarea>
+      <div class="modal-actions">
+        <button id="copyExportBtn" class="primary">Copy</button>
+        <button id="closeModalBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
