@@ -13,6 +13,10 @@ No install is required.
 
 The game is static HTML/CSS/JavaScript and does not require a server, database, account system or paid hosting.
 
+## v0.2.1 balance patch
+
+The early-game economy now has small baseline Alloy and Archive Data flows, the first Ash Levy does not require Authority to recruit, and new campaigns begin with a starter Ash Levy. This removes the circular resource locks found during the first public test.
+
 ## Current systems
 
 - Six resources.

@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.2.1 — Early-Game Deadlock Patch
+
+- New campaigns now start with 30 Alloy instead of 15.
+- New campaigns now start with 1 Ash Levy.
+- Ash Levy no longer costs Authority; it now costs only Provisions.
+- Added +0.08/s baseline Alloy salvage so an early purchase cannot permanently lock Alloy progression.
+- Added +0.05/s baseline Archive Data so the first research chain can always begin.
+- Existing untouched v0.2.0 saves are automatically repaired on load.
+- Existing save key is retained so browser progress is not discarded.
+- Updated visible version to v0.2.1.
+
 ## 0.2.0 — Public Alpha
 
 - Renamed and repositioned as an original public-release project.

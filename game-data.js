@@ -1,6 +1,6 @@
 
 window.GAME_DATA = {
-  version: "0.2.0",
+  version: "0.2.1",
 
   resources: {
     provisions:{name:"Provisions"},
@@ -48,7 +48,7 @@ window.GAME_DATA = {
 
     ashLevy:{
       group:"forces",name:"Ash Levy",desc:"Mass infantry raised from foundry districts and frontier settlements.",
-      baseCost:{provisions:28,authority:2},growth:1.16,produces:{authority:0.025},consumes:{provisions:0.008},power:1
+      baseCost:{provisions:28},growth:1.16,produces:{authority:0.025},consumes:{provisions:0.008},power:1
     },
     steelCohort:{
       group:"forces",name:"Steel Cohort",desc:"Disciplined professional infantry with sealed armour and heavy support.",

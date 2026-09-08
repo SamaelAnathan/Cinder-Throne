@@ -1,0 +1,35 @@
+CINDER THRONE v0.2.1 PATCH
+
+REPLACE THESE FILES IN THE ROOT OF YOUR GITHUB REPOSITORY:
+- game.js
+- game-data.js
+- index.html
+- CHANGELOG.md
+
+Optional but recommended:
+- README.md
+
+GitHub path:
+https://github.com/SamaelAnathan/Cinder-Throne
+
+EASIEST METHOD
+1. Open the repository.
+2. Click Add file > Upload files.
+3. Drag the patch files into the upload area.
+4. GitHub will warn that files with the same names already exist / will be replaced.
+5. Commit directly to main with message:
+   Patch v0.2.1 - fix early game resource deadlocks
+6. Open the Actions tab and wait for the Pages deployment to finish.
+7. Reload the live game with Ctrl+F5.
+
+IMPORTANT
+The save key was deliberately NOT changed. Existing browser saves will still load.
+Untouched/early v0.2.0 saves that were trapped by the old start are automatically repaired.
+
+WHAT THE PATCH FIXES
+- Start Alloy: 15 -> 30
+- Starter unit: 1 Ash Levy
+- Ash Levy no longer costs Authority
+- Baseline Alloy: +0.08/sec
+- Baseline Archive Data: +0.05/sec
+- v0.2.0 early-save migration

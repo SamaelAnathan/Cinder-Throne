@@ -11,8 +11,8 @@ const clone = o => JSON.parse(JSON.stringify(o));
 function makeState(){
   return {
     version:D.version,
-    resources:{provisions:120,alloy:45,fuel:0,data:0,authority:0,relics:0},
-    units:Object.fromEntries(Object.keys(D.units).map(k=>[k,0])),
+    resources:{provisions:120,alloy:30,fuel:0,data:0,authority:0,relics:0},
+    units:Object.assign(Object.fromEntries(Object.keys(D.units).map(k=>[k,0])),{ashLevy:1}),
     research:{},
     doctrine:Object.fromEntries(Object.keys(D.doctrine).map(k=>[k,0])),
     achievements:{},
@@ -109,8 +109,12 @@ function computeRates(){
   const r=Object.fromEntries(Object.keys(D.resources).map(k=>[k,0]));
   const ur=Object.fromEntries(Object.keys(D.units).map(k=>[k,0]));
 
-  // Civilian tithe ensures a playable start.
-  r.provisions += 1.15*doctrineMult("logistics",.18);
+  // Baseline civilian economy. These small passive flows deliberately prevent
+  // a new campaign from becoming permanently deadlocked by an early purchase.
+  const baseline=doctrineMult("logistics",.18);
+  r.provisions += 1.15*baseline;
+  r.alloy += 0.08*baseline;   // frontier salvage
+  r.data += 0.05*baseline;    // civil archive traffic
 
   for(const [id,def] of Object.entries(D.units)){
     const q=state.units[id]||0;
@@ -351,6 +355,23 @@ function load(){
     state.resources=Object.assign(fresh.resources,parsed.resources||{});
     state.units=Object.assign(fresh.units,parsed.units||{});
     state.doctrine=Object.assign(fresh.doctrine,parsed.doctrine||{});
+
+    // v0.2.1 migration: repair untouched/early v0.2.0 saves that could be
+    // trapped at 15 Alloy / 0 Authority / 0 Data.
+    if(parsed.version==="0.2.0"){
+      const hasResearch=Object.keys(parsed.research||{}).length>0;
+      const purchased=Number(parsed.totalUnitsBought||0);
+      const cleared=(parsed.cleared||[]).length;
+      const totalOwned=Object.values(parsed.units||{}).reduce((a,v)=>a+Number(v||0),0);
+
+      if(!hasResearch && cleared===0 && purchased===0 && totalOwned===0){
+        state.resources.alloy=Math.max(Number(state.resources.alloy||0),30);
+        state.units.ashLevy=Math.max(Number(state.units.ashLevy||0),1);
+        log("v0.2.1 recovery grant applied: starter Ash Levy and Alloy reserve restored.");
+      }
+      state.version=D.version;
+    }
+
     const elapsed=clamp((now()-(parsed.lastUpdate||now()))/1000,0,8*3600);
     if(elapsed>3){
       let remaining=elapsed;
